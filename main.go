@@ -8,7 +8,7 @@ import (
 	"net/url"
 	"os"
 
-	"github.com/discordianfish/blackbox_prober/pingers"
+	"github.com/afefelov/blackbox_prober/pingers"
 	"github.com/prometheus/client_golang/prometheus"
 )
 
@@ -47,6 +47,11 @@ func NewPingCollector(targets targets) *pingCollector {
 				Namespace: pingers.Namespace,
 				Name:      "size_bytes",
 				Help:      "Size of request for url",
+			}, []string{"url"}),
+			Code: prometheus.NewGaugeVec(prometheus.GaugeOpts{
+				Namespace: pingers.Namespace,
+				Name:      "response_code",
+				Help:      "Response code for url",
 			}, []string{"url"}),
 		},
 	}

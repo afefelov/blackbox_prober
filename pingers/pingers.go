@@ -28,6 +28,7 @@ type Metrics struct {
 	Up      *prometheus.GaugeVec
 	Latency *prometheus.GaugeVec
 	Size    *prometheus.GaugeVec
+	Code    *prometheus.GaugeVec
 	Expires *prometheus.GaugeVec
 }
 

@@ -47,10 +47,11 @@ func pingerHTTP(url *url.URL, m Metrics) {
 	if err != nil {
 		log.Printf("Couldn't read from %s: %s", url, err)
 	}
-
+	code, err := resp.StatusCode
 	m.Latency.WithLabelValues(url.String()).Set(time.Since(start).Seconds())
 	m.Size.WithLabelValues(url.String()).Set(float64(size))
 	m.Up.WithLabelValues(url.String()).Set(1)
+	m.Code.WithLabelValues(url.String()).Set(code)
 
 	if resp.TLS != nil {
 		var expires time.Time
