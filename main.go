@@ -8,7 +8,7 @@ import (
 	"net/url"
 	"os"
 
-	"github.com/afefelov/blackbox_prober/pingers"
+	"./pingers"
 	"github.com/prometheus/client_golang/prometheus"
 )
 
@@ -68,6 +68,7 @@ func (c pingCollector) Collect(ch chan<- prometheus.Metric) {
 	c.metrics.Up.Collect(ch)
 	c.metrics.Latency.Collect(ch)
 	c.metrics.Size.Collect(ch)
+	c.metrics.Code.Collect(ch)
 }
 
 // Describe implements prometheus.Collector.
@@ -75,6 +76,7 @@ func (c pingCollector) Describe(ch chan<- *prometheus.Desc) {
 	c.metrics.Up.Describe(ch)
 	c.metrics.Latency.Describe(ch)
 	c.metrics.Size.Describe(ch)
+	c.metrics.Code.Describe(ch)
 }
 
 type targets []*url.URL
